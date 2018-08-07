@@ -1,0 +1,13 @@
+<h1>Sentiment Transfer</h1>
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.source_string.label }}<br>
+        {{ form.source_string(size=40) }}<br>
+        {% for error in form.source_string.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>{{ form.submit() }}</p>
+    <p>{{ output }}</p>
+</form>
