@@ -7,10 +7,9 @@ MarkupSafe==1.0
 nltk==3.3
 numpy==1.15.0
 six==1.11.0
-torch==http://download.pytorch.org/whl/cpu/torch-0.4.1-cp36-cp36m-linux_x86_64.whl
 Werkzeug==0.14.1
 WTForms==2.2.1
-
+http://download.pytorch.org/whl/cpu/torch-0.4.1-cp36-cp36m-linux_x86_64.whl
 
 #Requirements for Heroku
 gunicorn==19.7.1
