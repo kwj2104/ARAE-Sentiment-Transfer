@@ -1,13 +1,59 @@
-<h1>Sentiment Transfer</h1>
-<form action="" method="post">
-    {{ form.hidden_tag() }}
-    <p>
-        {{ form.source_string.label }}<br>
-        {{ form.source_string(size=40) }}<br>
-        {% for error in form.source_string.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>{{ form.submit() }}</p>
-    <p>{{ output }}</p>
-</form>
+{% extends 'bootstrap/base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block navbar %}
+  <div class="navbar navbar-light" style="background-color: #e3f2fd;" role="navigation">
+      <div class="container">
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/">Sentiment Transfer Demo</a>
+          </div>
+          <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                  <li><a href="/">Blog</a></li>
+              </ul>
+          </div>
+      </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col" align="center">
+          <p>Try changing the sentiment of a sentence!
+            <br>This model adapts the research done by Zhao et. al.
+          in <a href="https://arxiv.org/abs/1706.04223">Adversarially Regularized Autoencoders</a></p>
+          {{ wtf.quick_form(form, button_map={'submit':'success'}, form_type='inline', horizontal_columns=('md', 3, 20)) }}
+          <p>{{ output }}</p>
+      </div>
+    </div>
+  </div>
+  <!--<form action="" method="post">
+      {{ form.hidden_tag() }}
+      <p>
+          {{ form.source_string.label }}<br>
+          {{ form.source_string(size=40) }}<br>
+          {% for error in form.source_string.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+      </p>
+      <p>{{ form.submit() }}</p>
+      <p>{{ output }}</p>
+  </form>-->
+{% endblock content %}
+
+
+{% block footer %}
+<footer class="fixed bottom">
+  <div class="container">
+    <span class="text-muted">Place sticky footer content here.</span>
+  </div>
+</footer>
+{% endblock footer %}
