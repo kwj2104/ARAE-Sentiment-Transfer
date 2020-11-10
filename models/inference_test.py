@@ -151,12 +151,12 @@ def inference(source_sent, vocab=None, state_dict="trained_models/autoencoder_mo
 #                lowercase=args.lowercase,
 #                vocab=vocabdict)
 
-source = "hell no"
+source = "you are beautiful"
 
 #print("SOURCE:")
 print(source)
 
-encoder_no = 1
+encoder_no = 0
 
 print(inference(source, state_dict="trained_models/autoencoder_model_25.pt", encoder_no=encoder_no))
 print(inference(source, state_dict="trained_models/autoencoder_model_50.pt", encoder_no=encoder_no))

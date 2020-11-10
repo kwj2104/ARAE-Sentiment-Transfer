@@ -1,3 +1,6 @@
+
+
+
 {% extends 'bootstrap/base.html' %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
@@ -23,37 +26,27 @@
 {% endblock %}
 
 {% block content %}
-
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
   <div class="container">
     <div class="row">
       <div class="col" align="center">
           <p>Try changing the sentiment of a sentence!
             <br>This model adapts the research done by Zhao et. al.
           in <a href="https://arxiv.org/abs/1706.04223">Adversarially Regularized Autoencoders</a></p>
-          {{ wtf.quick_form(form, button_map={'submit':'success'}, form_type='inline', horizontal_columns=('md', 3, 20)) }}
-          <p>{{ output }}</p>
-      </div>
-    </div>
-  </div>
-  <!--<form action="" method="post">
-      {{ form.hidden_tag() }}
-      <p>
-          {{ form.source_string.label }}<br>
-          {{ form.source_string(size=40) }}<br>
-          {% for error in form.source_string.errors %}
-          <span style="color: red;">[{{ error }}]</span>
-          {% endfor %}
-      </p>
-      <p>{{ form.submit() }}</p>
-      <p>{{ output }}</p>
-  </form>-->
+
+          <!--{{ wtf.quick_form(form, button_map={'submit':'success'}, form_type='inline') }}-->
+          <form action="" method="post">
+            {{ form.hidden_tag() }}
+            {{ form.csrf_token() }}
+            <p>{{ form.source_string }} Source</p>
+            <p>{{ form.source_option }} Option</p>
+            <!--<p><input type="submit" value="Submit"></p>-->
+            <p>{{ form.submit() }}</p>
+          </form>
+
+          {% if output != "" %}
+            {% for word, color in output %}
+            <p><font color="{{ color }}">{{ word[0] }}</font> {{ color }}</p>
+            {% endfor %}
+          {% endif %}
 {% endblock content %}
-
-
-{% block footer %}
-<footer class="fixed bottom">
-  <div class="container">
-    <span class="text-muted">Place sticky footer content here.</span>
-  </div>
-</footer>
-{% endblock footer %}

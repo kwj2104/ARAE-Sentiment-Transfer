@@ -6,14 +6,15 @@ from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 from torch.distributions import Normal
 import argparse
 import random
-from models.helpers import to_gpu, Corpus, batchify, Dictionary
+from helpers import to_gpu, Corpus, batchify, Dictionary
+
+
 #import helpers
 import json
 import os
 import numpy as np
-from models.models import Seq2Seq2Decoder
+from models import Seq2Seq2Decoder
 import nltk
-import math
 
 #parser = argparse.ArgumentParser(description='ARAE for Yelp transfer')
 # Path Arguments
@@ -154,17 +155,18 @@ def sent_inference(source_sent, vocab=None, state_dict="models/trained_models/au
 #    print()
 #    print("DECODED:")
     cont = True
-    confidence = 0
+    confidence = []
     word_count = 0
-    decoded_sent = ""
+    decoded_sent = []
     for i, idx in enumerate(decoded[0]):
         if cont:
-            decoded_sent = decoded_sent + " " + vocabdict.idx2word[idx.item()]
-            confidence += math.log(all_vals[i])
+            decoded_sent.append((vocabdict.idx2word[idx.item()], all_vals[i]))
+            #confidence.append(all_vals[i])
+            #confidence += math.log(all_vals[i])
             word_count += 1
         if idx.item() == 2:
             cont = False
-    return decoded_sent, confidence/word_count
+    return decoded_sent
 
 
 #json_file = open('yelp_example/vocab.json')
