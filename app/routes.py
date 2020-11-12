@@ -19,13 +19,25 @@ def inference():
 
     if form.validate_on_submit():
         # Perform inference
-        result = sent_inference(form.source_string.data, encoder_no=form.source_option.data)
+        result_25 = sent_inference(form.source_string.data, encoder_no=form.source_option.data, state_dict="models/trained_models/autoencoder_model_25.pt")
+        result_50 = sent_inference(form.source_string.data, encoder_no=form.source_option.data, state_dict="models/trained_models/autoencoder_model_50.pt")
+        result_l10 = sent_inference(form.source_string.data, encoder_no=form.source_option.data, state_dict="models/trained_models/autoencoder_model_lambda10_50.pt")
 
         colors = []
-        for _, conf in result:
+        for _, conf in result_25:
             colors.append(hex(round(conf*int(target_color, 16))))
-        #output = [(word, color) for word, conf in result for color in colors]
-        output = list(zip(result, colors))
+        output_25 = list(zip(result_25, colors))
 
-        print(output)
-    return render_template('sentence_input.html', form=form, output=output)
+        for _, conf in result_50:
+            colors.append(hex(round(conf*int(target_color, 16))))
+        output_50 = list(zip(result_25, colors))
+
+        for _, conf in result_l10:
+            colors.append(hex(round(conf*int(target_color, 16))))
+        output_l10 = list(zip(result_25, colors))
+
+        print(output_25)
+        print(output_50)
+        print(output_l10)
+
+    return render_template('sentence_input.html', form=form, output1=output_25, output2=output_50, output3=output_l10)

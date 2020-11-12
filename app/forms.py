@@ -1,10 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
-from wtforms.validators import DataRequired, Optional, ValidationError
+from wtforms import StringField, SubmitField, SelectField
+from wtforms.validators import DataRequired, ValidationError
 
 def validate_staff(form, field):
     if field.data == 0:
-        raise ValidationError("Sorry, you havn't chosen a option")
+        raise ValidationError("Sorry, you haven't chosen a option")
 
 class SentenceForm(FlaskForm):
     options = [(0, "--"), (2, 'Negative'), (1,'Positive')]

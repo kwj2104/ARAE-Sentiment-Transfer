@@ -6,7 +6,7 @@ from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 from torch.distributions import Normal
 
 
-from helpers import to_gpu
+from models.helpers import to_gpu
 import json
 import os
 import numpy as np

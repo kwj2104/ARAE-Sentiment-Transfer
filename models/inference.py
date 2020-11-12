@@ -6,13 +6,13 @@ from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 from torch.distributions import Normal
 import argparse
 import random
-from helpers import to_gpu, Corpus, batchify, Dictionary
+from models.helpers import to_gpu, Corpus, batchify, Dictionary
 
 #import helpers
 import json
 import os
 import numpy as np
-from models import Seq2Seq2Decoder
+from models.models import Seq2Seq2Decoder
 import nltk
 
 #parser = argparse.ArgumentParser(description='ARAE for Yelp transfer')
@@ -87,9 +87,6 @@ HIDDEN_INIT=False
 DROPOUT=0
 CUDA=False
 
-
-
-
 os.environ['CUDA_VISIBLE_DEVICES'] = DEVICE_ID
 
 # Set the random seed manually for reproducibility.
@@ -104,7 +101,7 @@ if torch.cuda.is_available():
         pass
         #torch.cuda.manual_seed(args.seed)
 
-def sent_inference(source_sent, vocab=None, state_dict="models/trained_models/autoencoder_model_25.pt", encoder_no=1):
+def sent_inference(source_sent, vocab=None, state_dict="models/trained_models/autoencoder_model_50.pt", encoder_no=1):
     #Load vocab
     if vocab == None:
         json_file = open('models/yelp_example/vocab.json')
@@ -151,8 +148,6 @@ def sent_inference(source_sent, vocab=None, state_dict="models/trained_models/au
     decoded, all_vals = autoencoder.generate(encoder_no, encoded, maxlen=50)
 
     #Print Decoded Sentence
-#    print()
-#    print("DECODED:")
     cont = True
     confidence = []
     word_count = 0
@@ -160,8 +155,6 @@ def sent_inference(source_sent, vocab=None, state_dict="models/trained_models/au
     for i, idx in enumerate(decoded[0]):
         if cont:
             decoded_sent.append((vocabdict.idx2word[idx.item()], all_vals[i]))
-            #confidence.append(all_vals[i])
-            #confidence += math.log(all_vals[i])
             word_count += 1
         if idx.item() == 2:
             cont = False

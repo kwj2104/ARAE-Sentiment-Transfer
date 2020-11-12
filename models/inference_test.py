@@ -6,7 +6,7 @@ from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 from torch.distributions import Normal
 import argparse
 import random
-from helpers import to_gpu, Corpus, batchify, Dictionary
+from models.helpers import to_gpu, Corpus, batchify, Dictionary
 #import helpers
 import json
 import os

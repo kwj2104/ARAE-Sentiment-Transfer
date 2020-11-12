@@ -44,9 +44,27 @@
             <p>{{ form.submit() }}</p>
           </form>
 
-          {% if output != "" %}
-            {% for word, color in output %}
-            <p><font color="{{ color }}">{{ word[0] }}</font> {{ color }}</p>
+          {% if output1 != "" %}
+            <p>
+            {% for word, color in output1 %}
+            <font color="{{ color }}">{{ word[0] }}</font>
             {% endfor %}
+            </p>
+          {% endif %}
+
+          {% if output2 != "" %}
+            <p>
+            {% for word, color in output2 %}
+            <font color="{{ color }}">{{ word[0] }}</font>
+            {% endfor %}
+            </p>
+          {% endif %}
+
+          {% if output3 != "" %}
+            <p>
+            {% for word, color in output3 %}
+            <font color="{{ color }}">{{ word[0] }}</font>
+            {% endfor %}
+            </p>
           {% endif %}
 {% endblock content %}
