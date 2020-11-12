@@ -6,7 +6,7 @@ from models.inference import sent_inference
 @app.route('/')
 @app.route('/index')
 def index():
-    return "Hello, World!"
+    return "Hello, World! TEST"
 
 
 @app.route('/inference', methods=['GET', 'POST'])
