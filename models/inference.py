@@ -8,7 +8,6 @@ import argparse
 import random
 from helpers import to_gpu, Corpus, batchify, Dictionary
 
-
 #import helpers
 import json
 import os
