@@ -12,7 +12,7 @@ from models.helpers import to_gpu, Corpus, batchify, Dictionary
 import json
 import os
 import numpy as np
-from models.models import Seq2Seq2Decoder
+from models.models_final import Seq2Seq2Decoder
 import nltk
 
 #parser = argparse.ArgumentParser(description='ARAE for Yelp transfer')
@@ -103,6 +103,7 @@ if torch.cuda.is_available():
 
 def sent_inference(source_sent, vocab=None, state_dict="models/trained_models/autoencoder_model_50.pt", encoder_no=1):
     #Load vocab
+
     if vocab == None:
         json_file = open('models/yelp_example/vocab.json')
         json_str = json_file.read()
@@ -121,6 +122,7 @@ def sent_inference(source_sent, vocab=None, state_dict="models/trained_models/au
                       dropout=DROPOUT,
                       gpu=CUDA)
     autoencoder.load_state_dict(torch.load(state_dict, map_location=lambda storage, loc: storage))
+
     autoencoder.eval()
 
     #Tokenize and clean input, turn into Tensor

@@ -11,7 +11,7 @@ from models.helpers import to_gpu, Corpus, batchify, Dictionary
 import json
 import os
 import numpy as np
-from models.models import Seq2Seq2Decoder
+from models.models_final import Seq2Seq2Decoder
 import nltk
 import math
 

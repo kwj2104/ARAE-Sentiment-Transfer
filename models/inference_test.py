@@ -7,11 +7,12 @@ from torch.distributions import Normal
 import argparse
 import random
 from models.helpers import to_gpu, Corpus, batchify, Dictionary
+from models.inference import sent_inference
 #import helpers
 import json
 import os
 import numpy as np
-from models_test import Seq2Seq2Decoder
+from models.models_test import Seq2Seq2Decoder
 import nltk
 import math
 
@@ -78,7 +79,7 @@ if torch.cuda.is_available():
         pass
         #torch.cuda.manual_seed(args.seed)
 
-def inference(source_sent, vocab=None, state_dict="trained_models/autoencoder_model.pt", encoder_no=1):
+def test_inference(source_sent, vocab=None, state_dict="trained_models/autoencoder_model.pt", encoder_no=1):
     #Load vocab
     if vocab == None:
         json_file = open('yelp_example/vocab.json')
@@ -151,17 +152,21 @@ def inference(source_sent, vocab=None, state_dict="trained_models/autoencoder_mo
 #                lowercase=args.lowercase,
 #                vocab=vocabdict)
 
-source = "you are beautiful"
+source = "you suck"
 
 #print("SOURCE:")
 print(source)
 
 encoder_no = 0
 
-print(inference(source, state_dict="trained_models/autoencoder_model_25.pt", encoder_no=encoder_no))
-print(inference(source, state_dict="trained_models/autoencoder_model_50.pt", encoder_no=encoder_no))
-print(inference(source, state_dict="trained_models/autoencoder_model_lambda10_50.pt", encoder_no=encoder_no))
+print(test_inference(source, state_dict="trained_models/autoencoder_model_25.pt", encoder_no=encoder_no))
+print(test_inference(source, state_dict="trained_models/autoencoder_model_50.pt", encoder_no=encoder_no))
+print(test_inference(source, state_dict="trained_models/autoencoder_model_lambda10_50.pt", encoder_no=encoder_no))
 
+
+print(sent_inference(source, state_dict="trained_models/autoencoder_model_25.pt", encoder_no=encoder_no))
+print(sent_inference(source, state_dict="trained_models/autoencoder_model_50.pt", encoder_no=encoder_no))
+print(sent_inference(source, state_dict="trained_models/autoencoder_model_lambda10_50.pt", encoder_no=encoder_no))
 #eval_batch_size = 1
 #test1_data = batchify(corpus.data['valid2'], eval_batch_size, shuffle=False)
 #print("Loaded data!")
