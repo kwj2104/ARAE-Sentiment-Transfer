@@ -7,7 +7,7 @@ itsdangerous==0.24
 Jinja2==2.10
 MarkupSafe==1.0
 nltk==3.3
-numpy==1.15.0
+numpy==1.22.0
 six==1.11.0
 torch==0.4.1
 visitor==0.1.3
